@@ -1,4 +1,4 @@
-package com.reminder;
+package com.reminder.util;
 
 import com.google.gson.Gson;
 import spark.Response;

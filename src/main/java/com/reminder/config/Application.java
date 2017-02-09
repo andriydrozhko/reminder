@@ -1,10 +1,12 @@
-package com.reminder;
+package com.reminder.config;
 
 import com.mongodb.*;
+import com.reminder.resources.EventResource;
+import com.reminder.service.EventService;
 
 import static spark.Spark.*;
 
-public class Bootstrap {
+public class Application {
     private static final String IP_ADDRESS = System.getenv("OPENSHIFT_DIY_IP") != null ? System.getenv("OPENSHIFT_DIY_IP") : "localhost";
     private static final int PORT = System.getenv("OPENSHIFT_DIY_IP") != null ? Integer.parseInt(System.getenv("OPENSHIFT_DIY_IP")) : 8080;
 
@@ -12,14 +14,14 @@ public class Bootstrap {
         ipAddress(IP_ADDRESS);
         port(PORT);
         staticFileLocation("/public");
-        new TodoResource(new TodoService(mongo()));
+        new EventResource(new EventService(mongo()));
     }
 
     private static DB mongo() throws Exception {
         String host = System.getenv("OPENSHIFT_MONGODB_DB_HOST");
         if (host == null) {
             MongoClient mongoClient = new MongoClient("localhost");
-            return mongoClient.getDB("todoapp");
+            return mongoClient.getDB("eventsapp");
         }
         int port = Integer.parseInt(System.getenv("OPENSHIFT_MONGODB_DB_PORT"));
         String dbname = System.getenv("OPENSHIFT_APP_NAME");

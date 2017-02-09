@@ -1,0 +1,31 @@
+<h2>All Events <a class="btn btn-primary pull-right" href="#/create"><i
+        class="icon-plus-sign icon-white"></i> New Event</a></h2>
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Created Date
+        </th>
+        <th>
+            Event Date
+        </th>
+    </tr>
+    <tr ng-repeat="event in events">
+        <td>{{$index+1}}</td>
+        <td>
+            {{event.title}}
+        </td>
+        <td>
+            {{event.createdOn |date:'medium'}}
+        </td>
+        <td>
+            {{event.eventDate |date:'medium'}}
+        </td>
+    </tr>
+</table>

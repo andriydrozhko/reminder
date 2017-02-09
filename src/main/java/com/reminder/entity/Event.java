@@ -1,22 +1,21 @@
-package com.reminder;
+package com.reminder.entity;
+
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 import org.bson.types.ObjectId;
 
 import java.util.Date;
 
-public class Todo {
-
+public class Event {
     private String id;
     private String title;
-    private boolean done;
-    private Date createdOn = new Date();
+    private Date eventDate;
+    private Date createdOn;
 
-    public Todo(BasicDBObject dbObject) {
+    public Event(BasicDBObject dbObject) {
         this.id = ((ObjectId) dbObject.get("_id")).toString();
         this.title = dbObject.getString("title");
-        this.done = dbObject.getBoolean("done");
+        this.eventDate = dbObject.getDate("eventDate");
         this.createdOn = dbObject.getDate("createdOn");
     }
 
@@ -24,11 +23,11 @@ public class Todo {
         return title;
     }
 
-    public boolean isDone() {
-        return done;
+    public Date getEventDate() {
+        return eventDate;
     }
 
-    public Date getCreatedOn() {
+    public Date getCreateOn() {
         return createdOn;
     }
 }

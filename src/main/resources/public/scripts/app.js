@@ -1,8 +1,4 @@
-/**
- * Created by shekhargulati on 10/06/14.
- */
-
-var app = angular.module('todoapp', [
+var app = angular.module('eventsapp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
@@ -11,10 +7,10 @@ var app = angular.module('todoapp', [
 
 app.config(function ($routeProvider) {
     $routeProvider.when('/', {
-        templateUrl: 'views/list.html',
+        templateUrl: 'views/events/list.html',
         controller: 'ListCtrl'
     }).when('/create', {
-        templateUrl: 'views/create.html',
+        templateUrl: 'views/events/create.html',
         controller: 'CreateCtrl'
     }).otherwise({
         redirectTo: '/'
@@ -22,30 +18,26 @@ app.config(function ($routeProvider) {
 });
 
 app.controller('ListCtrl', function ($scope, $http) {
-    $http.get('/api/v1/todos').success(function (data) {
-        $scope.todos = data;
+    $http.get('/api/v1/events').success(function (data) {
+        $scope.events = data;
     }).error(function (data, status) {
         console.log('Error ' + data)
-    })
+    });
 
-    $scope.todoStatusChanged = function (todo) {
-        console.log(todo);
-        $http.put('/api/v1/todos/' + todo.id, todo).success(function (data) {
-            console.log('status changed');
-        }).error(function (data, status) {
-            console.log('Error ' + data)
-        })
-    }
+    //$scope.todoStatusChanged = function (event) {
+    //    console.log(todo);
+    //    $http.put('/api/v1/events/' + event.id, event).success(function (data) {
+    //        console.log('status changed');
+    //    }).error(function (data, status) {
+    //        console.log('Error ' + data)
+    //    })
+    //}
 });
 
 app.controller('CreateCtrl', function ($scope, $http, $location) {
-    $scope.todo = {
-        done: false
-    };
-
-    $scope.createTodo = function () {
-        console.log($scope.todo);
-        $http.post('/api/v1/todos', $scope.todo).success(function (data) {
+    $scope.createEvent = function () {
+        console.log($scope.event);
+        $http.post('/api/v1/events', $scope.event).success(function (data) {
             $location.path('/');
         }).error(function (data, status) {
             console.log('Error ' + data)
