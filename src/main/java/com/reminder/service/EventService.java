@@ -4,8 +4,10 @@ package com.reminder.service;
 import com.google.gson.Gson;
 import com.mongodb.*;
 import com.reminder.entity.Event;
+import com.reminder.util.EmailService;
 import org.bson.types.ObjectId;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,8 @@ public class EventService {
             DBObject dbObject = dbObjects.next();
             events.add(new Event((BasicDBObject) dbObject));
         }
+        EmailService.sendMessage("andriydrozhko@gmail.com", "Test subject", "Test text");
+
         return events;
     }
 

@@ -35,52 +35,20 @@ app.controller('ListCtrl', function ($scope, $http) {
 });
 
 app.controller('CreateCtrl', function ($scope, $http, $location) {
-    var navListItems = $('div.setup-panel div a'),
-        allWells = $('.setup-content'),
-        allNextBtn = $('.nextBtn');
 
-    allWells.hide();
+    console.log($("#datetimepicker12").data('date'))
+    console.log($scope.vm)
 
-    navListItems.click(function (e) {
-        e.preventDefault();
-        var $target = $($(this).attr('href')),
-            $item = $(this);
-
-        if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-primary').addClass('btn-default');
-            $item.addClass('btn-primary');
-            allWells.hide();
-            $target.show();
-            $target.find('input:eq(0)').focus();
-        }
-    });
-
-    allNextBtn.click(function(){
-        var curStep = $(this).closest(".setup-content"),
-            curStepBtn = curStep.attr("id"),
-            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='url']"),
-            isValid = true;
-
-        $(".form-group").removeClass("has-error");
-        for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-        }
-
-        if (isValid)
-            nextStepWizard.removeAttr('disabled').trigger('click');
-    });
-
-    $('div.setup-panel div a.btn-primary').trigger('click');
     $scope.createEvent = function () {
+        if(undefined == $scope.event) {
+            $scope.event = {};
+        }
+        $scope.event.eventDate = $("#datetimepicker12").data('date');
         console.log($scope.event);
-        $http.post('/api/v1/events', $scope.event).success(function (data) {
-            $location.path('/');
-        }).error(function (data, status) {
-            console.log('Error ' + data)
-        })
+        //$http.post('/api/v1/events', $scope.event).success(function (data) {
+        //    $location.path('/');
+        //}).error(function (data, status) {
+        //    console.log('Error ' + data)
+        //})
     }
 });

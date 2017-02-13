@@ -3,6 +3,7 @@ package com.reminder.config;
 import com.mongodb.*;
 import com.reminder.resources.EventResource;
 import com.reminder.service.EventService;
+import com.reminder.util.EmailService;
 
 import static spark.Spark.*;
 
@@ -15,6 +16,7 @@ public class Application {
         port(PORT);
         staticFileLocation("/public");
         new EventResource(new EventService(mongo()));
+        new EmailService();
     }
 
     private static DB mongo() throws Exception {
