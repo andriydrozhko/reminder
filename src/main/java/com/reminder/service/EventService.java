@@ -2,23 +2,22 @@ package com.reminder.service;
 
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mongodb.*;
 import com.reminder.entity.Event;
-import com.reminder.util.EmailService;
 import org.bson.types.ObjectId;
 
-import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class EventService {
 
-    private final DB db;
     private final DBCollection collection;
 
+    private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
+
     public EventService(DB db) {
-        this.db = db;
         this.collection = db.getCollection("events");
     }
 
@@ -29,13 +28,11 @@ public class EventService {
             DBObject dbObject = dbObjects.next();
             events.add(new Event((BasicDBObject) dbObject));
         }
-        EmailService.sendMessage("andriydrozhko@gmail.com", "Test subject", "Test text");
-
         return events;
     }
 
     public void createEvent(String body) {
-        Event event = new Gson().fromJson(body, Event.class);
+        Event event = gson.fromJson(body, Event.class);
         collection.insert(new BasicDBObject("title", event.getTitle())
                 .append("eventDate", event.getEventDate())
                 .append("createdOn", new Date()));

@@ -13,7 +13,7 @@ public class Event {
     private Date createdOn;
 
     public Event(BasicDBObject dbObject) {
-        this.id = ((ObjectId) dbObject.get("_id")).toString();
+        this.id = dbObject.get("_id").toString();
         this.title = dbObject.getString("title");
         this.eventDate = dbObject.getDate("eventDate");
         this.createdOn = dbObject.getDate("createdOn");

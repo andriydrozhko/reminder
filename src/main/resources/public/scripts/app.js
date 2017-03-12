@@ -45,10 +45,10 @@ app.controller('CreateCtrl', function ($scope, $http, $location) {
         }
         $scope.event.eventDate = $("#datetimepicker12").data('date');
         console.log($scope.event);
-        //$http.post('/api/v1/events', $scope.event).success(function (data) {
-        //    $location.path('/');
-        //}).error(function (data, status) {
-        //    console.log('Error ' + data)
-        //})
+        $http.post('/api/v1/events', $scope.event).success(function (data) {
+           $location.path('/');
+        }).error(function (data, status) {
+           console.log('Error ' + data)
+        })
     }
 });
