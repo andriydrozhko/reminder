@@ -51,7 +51,7 @@ public class EventResource extends BaseResource {
     }
 
     private Event findOne(Request request, Response response) {
-        return eventService.find(request.params(":id"));
+        return eventService.findOne(request.params(":id"));
     }
 
     private Response update(Request request, Response response) {

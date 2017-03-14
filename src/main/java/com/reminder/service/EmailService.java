@@ -1,7 +1,6 @@
-package com.reminder.util;
+package com.reminder.service;
 
 import javax.mail.*;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
@@ -10,8 +9,11 @@ public class EmailService {
 
     private static final String host = "smtp.gmail.com";
     private static final String port = "465";
-    private static final String username = "jhonewayn@gmail.com";
-    private static final String password = "Andriy18121991";
+
+    //TODO Update me
+    private static final String USER_NAME = "";
+    private static final String PASSWORD = "";
+    private static final String NO_REPLY_EMAIL = "no-reply@reminder.com";
     private static Session session;
 
     public EmailService() {
@@ -25,7 +27,7 @@ public class EmailService {
         session = Session.getInstance(props,
             new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
+                    return new PasswordAuthentication(USER_NAME, PASSWORD);
                 }
             });
     }
@@ -33,7 +35,7 @@ public class EmailService {
     public static void sendMessage(String to, String subject, String messageText) {
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("no-reply@reminder.com"));
+            message.setFrom(new InternetAddress(NO_REPLY_EMAIL));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to));
             message.setSubject(subject);
