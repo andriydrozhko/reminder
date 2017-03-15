@@ -6,6 +6,7 @@ import spark.ResponseTransformer;
 
 import java.util.HashMap;
 
+//TODO It's not UTIL class
 public class JsonTransformer implements ResponseTransformer {
 
     private Gson gson = new Gson();
