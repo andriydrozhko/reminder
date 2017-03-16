@@ -16,16 +16,6 @@ public class Event {
     private Date updatedDate;
     private Boolean processed = false;
     private Date processedDate;
-//
-//    public Event(BasicDBObject dbObject) {
-//        this.id = dbObject.get("_id").toString();
-//        this.title = dbObject.getString("title");
-//        this.eventDate = dbObject.getDate("eventDate");
-//        this.updatedDate = dbObject.getDate("updatedDate");
-//        this.createdOn = dbObject.getDate("createdOn");
-//        this.processed = dbObject.getBoolean("processed");
-//        this.createdOn = dbObject.getDate("processedDate");
-//    }
 
     public Date getUpdatedDate() {
         return updatedDate;

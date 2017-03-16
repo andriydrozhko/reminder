@@ -16,7 +16,6 @@ import java.util.List;
 public class EventServiceImpl implements EventService {
 
     private final EventRepository repository;
-    private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 
     @Autowired
     public EventServiceImpl(EventRepository repository) {
@@ -36,19 +35,20 @@ public class EventServiceImpl implements EventService {
         return repository.save(event);
     }
 
+    @Override
     public Event findOne(String id) {
         return repository.findOne(id);
     }
 
+    @Override
     public void remove(String id) {
         repository.delete(id);
     }
 
-    public void update(String eventId, String body) {
-        //todo i not look on logick can work incorrect
-        Event event = gson.fromJson(body, Event.class);
+    @Override
+    public Event update(Event event) {
         event.setUpdatedDate(new Date());
-        repository.save(event);
+        return repository.save(event);
     }
 
 }
