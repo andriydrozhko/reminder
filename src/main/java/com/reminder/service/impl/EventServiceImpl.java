@@ -1,8 +1,6 @@
 package com.reminder.service.impl;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.reminder.repository.EventRepository;
 import com.reminder.entity.Event;
 import com.reminder.service.EventService;
@@ -11,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -29,9 +29,6 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event save(Event event) {
-        Date now = new Date();
-        event.setCreatedOn(now);
-        event.setUpdatedDate(now);
         return repository.save(event);
     }
 
@@ -45,10 +42,14 @@ public class EventServiceImpl implements EventService {
         repository.delete(id);
     }
 
-    @Override
-    public Event update(Event event) {
-        event.setUpdatedDate(new Date());
-        return repository.save(event);
+    public Event saveOrUpdate(Event event) {
+        //TODO provide own custom exception or use hibernate validator on class level due to validation purpose
+        assertNotNull(event);
+        boolean creationFlow = null == event.getId();
+        Date now = new Date();
+        if (creationFlow) event.setCreatedDate(now);
+        event.setUpdatedDate(now);
+        return save(event);
     }
 
 }
