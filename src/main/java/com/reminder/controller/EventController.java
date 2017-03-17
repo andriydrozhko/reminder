@@ -24,6 +24,7 @@ public class EventController {
     @Autowired
     private MapperFacade mapper;
 
+    //TODO provide filter with pageable parameter, to avoid performance issues
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok(mapper.mapAsList(eventService.findAll(), EventDto.class));
