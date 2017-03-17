@@ -6,9 +6,11 @@ import com.reminder.service.EventService;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@PreAuthorize("hasAuthority('API_USER')")
 @RequestMapping("api/v1/events")
 public class EventController {
 
