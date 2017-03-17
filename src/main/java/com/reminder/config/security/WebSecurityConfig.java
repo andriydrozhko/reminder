@@ -45,6 +45,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //TODO need to create default user when new database
+        //TODO For login first time and add default login uncomment those lines and comment other so you can login and create user
+//        auth.inMemoryAuthentication()
+//                .withUser("admin")
+//                .password("password")
+//                .roles("ADMIN");
         auth
                 .userDetailsService(userDetailService)
                 .passwordEncoder(new ShaPasswordEncoder(256));
