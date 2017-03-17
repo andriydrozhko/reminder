@@ -2,6 +2,7 @@ package com.reminder.config.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reminder.entity.AccountCredentials;
+import com.reminder.util.Cipher;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

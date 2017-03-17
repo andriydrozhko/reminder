@@ -1,6 +1,7 @@
 package com.reminder.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.Date;
 
@@ -14,6 +15,8 @@ public class Event {
     private Date updatedDate;
     private Boolean processed = Boolean.FALSE;
     private Date processedDate;
+//    @DBRef
+//    private User createdBy;
 
     public String getId() {
         return id;
@@ -70,4 +73,12 @@ public class Event {
     public void setProcessedDate(Date processedDate) {
         this.processedDate = processedDate;
     }
+
+//    public User getCreatedBy() {
+//        return createdBy;
+//    }
+//
+//    public void setCreatedBy(User createdBy) {
+//        this.createdBy = createdBy;
+//    }
 }
