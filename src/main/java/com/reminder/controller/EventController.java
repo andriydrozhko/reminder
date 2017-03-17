@@ -6,8 +6,13 @@ import com.reminder.service.EventService;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
+//TODO move base resource 'api/v1' to Constants
 @RestController
 @RequestMapping("api/v1/events")
 public class EventController {
@@ -15,6 +20,7 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
+    //TODO move in BaseController
     @Autowired
     private MapperFacade mapper;
 
