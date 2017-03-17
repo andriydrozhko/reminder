@@ -6,9 +6,14 @@ import com.reminder.service.EventService;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
 
+//TODO move base resource 'api/v1' to Constants
 @RestController
 @PreAuthorize("hasAuthority('API_USER')")
 @RequestMapping("api/v1/events")
@@ -17,9 +22,11 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
+    //TODO move in BaseController
     @Autowired
     private MapperFacade mapper;
 
+    //TODO provide filter with pageable parameter, to avoid performance issues
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok(mapper.mapAsList(eventService.findAll(), EventDto.class));

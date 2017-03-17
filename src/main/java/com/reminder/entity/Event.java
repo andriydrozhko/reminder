@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.Date;
 
+//TODO try to use JAVA 8 Date Api
 public class Event {
 
     @Id
