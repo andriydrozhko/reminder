@@ -1,4 +1,4 @@
-package com.reminder.service;
+package com.reminder.service.impl;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;

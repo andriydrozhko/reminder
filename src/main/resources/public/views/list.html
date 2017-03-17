@@ -20,7 +20,7 @@
             {{todo.title}}
         </td>
         <td>
-            {{todo.createdOn |date:'medium'}}
+            {{todo.createdDate |date:'medium'}}
         </td>
         <td>
             <input type="checkbox" ng-change="todoStatusChanged(todo)" ng-value="todo.done" ng-model="todo.done">
