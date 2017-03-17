@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 //TODO move base resource 'api/v1' to Constants
 @RestController
+@PreAuthorize("hasAuthority('API_USER')")
 @RequestMapping("api/v1/events")
 public class EventController {
 
