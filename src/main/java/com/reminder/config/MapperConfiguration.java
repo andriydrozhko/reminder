@@ -48,10 +48,12 @@ public class MapperConfiguration extends ConfigurableMapper implements Applicati
         registerFromAListToB(mapper);
     }
 
+    @SuppressWarnings("unchecked")
     private void registerFromAToB(Mapper<?, ?> mapper) {
         factory.classMap(mapper.getAType(), mapper.getBType()).customize((Mapper) mapper).byDefault().register();
     }
 
+    @SuppressWarnings("unchecked")
     private void registerFromAListToB(Mapper<?, ?> mapper) {
         factory.classMap(new TypeBuilder<List<?>>() {}.build(), mapper.getBType()).customize((Mapper) mapper).register();
     }

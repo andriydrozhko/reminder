@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -30,10 +29,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // disable caching
         http.headers().cacheControl();
-
         http.csrf().disable() // disable csrf for our requests.
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/v2/api-docs").permitAll()
+                .antMatchers("/configuration/ui").permitAll()
+                .antMatchers("/swagger-resources").permitAll()
+                .antMatchers("/configuration/security").permitAll()
+                .antMatchers("/swagger-resources/configuration/ui").permitAll()
+                .antMatchers("/swagger-resources/configuration/security").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers(HttpMethod.POST, "api/v1/login").permitAll()
                 .anyRequest().authenticated()
                 .and()

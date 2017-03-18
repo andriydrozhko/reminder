@@ -5,7 +5,7 @@ import com.reminder.entity.User;
 import com.reminder.entity.enums.UserRole;
 import com.reminder.repository.UserRepository;
 import com.reminder.service.UserService;
-import com.reminder.util.Cipher;
+import com.reminder.util.CipherUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,14 +47,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User saveOrUpdate(User user) {
-        //TODO provide own custom exception or use hibernate validator on class level due to validation purpose
-        assertNotNull(user);
         boolean creationFlow = null == user.getId();
         Date now = new Date();
         if (creationFlow) user.setCreatedDate(now);
         user.setUpdatedDate(now);
-        assertNotNull(user.getPassword());
-        user.setPassword(Cipher.encrypt(user.getPassword()));
+        user.setPassword(CipherUtil.encrypt(user.getPassword()));
         user.setRoles(Sets.newHashSet(UserRole.USER));
         return userRepository.save(user);
     }

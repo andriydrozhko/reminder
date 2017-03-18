@@ -2,7 +2,6 @@ package com.reminder.config.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reminder.entity.AccountCredentials;
-import com.reminder.util.Cipher;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -35,8 +34,8 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication)
-            throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+                                            FilterChain chain, Authentication authentication) throws IOException, ServletException {
         String name = authentication.getName();
         tokenAuthenticationService.addAuthentication(response, name);
     }

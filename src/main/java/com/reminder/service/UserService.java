@@ -1,7 +1,5 @@
 package com.reminder.service;
 
-
-import com.reminder.dto.UserDto;
 import com.reminder.entity.User;
 
 import java.util.List;
