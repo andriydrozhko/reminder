@@ -1,7 +1,7 @@
 package com.reminder.entity;
 
 
-import com.reminder.entity.enums.UserRole;
+import com.reminder.enums.UserRole;
 import org.springframework.data.annotation.Id;
 
 import java.util.Date;

@@ -2,7 +2,7 @@ package com.reminder.service.impl;
 
 import com.google.common.collect.Sets;
 import com.reminder.entity.User;
-import com.reminder.entity.enums.UserRole;
+import com.reminder.enums.UserRole;
 import com.reminder.repository.UserRepository;
 import com.reminder.service.UserService;
 import com.reminder.util.CipherUtil;

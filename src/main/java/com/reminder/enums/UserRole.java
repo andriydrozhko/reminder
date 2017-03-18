@@ -1,4 +1,4 @@
-package com.reminder.entity.enums;
+package com.reminder.enums;
 
 public enum UserRole {
     USER, ADMIN

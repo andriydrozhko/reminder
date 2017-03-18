@@ -1,7 +1,7 @@
 package com.reminder.service.impl;
 
 import com.reminder.entity.User;
-import com.reminder.entity.enums.UserRole;
+import com.reminder.enums.UserRole;
 import com.reminder.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
