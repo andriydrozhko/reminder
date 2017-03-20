@@ -34,7 +34,7 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(value = { AccessDeniedException.class })
     public ResponseEntity<?> handleAccessDenied(Exception ex) {
-        return prepareResponse("Access denied message here", ex, new HttpHeaders(), HttpStatus.FORBIDDEN);
+        return prepareResponse("Access denied message here", ex, new HttpHeaders(), HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(value = { MethodArgumentNotValidException.class })
