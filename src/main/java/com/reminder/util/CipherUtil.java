@@ -2,6 +2,8 @@ package com.reminder.util;
 
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -14,6 +16,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 public final class CipherUtil {
+
+    private static final Logger log = LoggerFactory.getLogger(CipherUtil.class);
 
     private CipherUtil() { }
 
@@ -28,7 +32,7 @@ public final class CipherUtil {
         try {
             s = encryptToSHA(s);
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+            log.error("Error while encrypting value : " + str, e);
         }
 
         return s;
@@ -53,12 +57,13 @@ public final class CipherUtil {
 
     public static String decryptDES(String encryptedData) throws Exception {
         Key key = generateKey();
-        Cipher c = Cipher.getInstance("DES/ECB/PKCS5Padding");
-        c.init(Cipher.DECRYPT_MODE, key);
+        Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+        cipher.init(Cipher.DECRYPT_MODE, key);
         byte[] decodedValue = new BASE64Decoder().decodeBuffer(encryptedData);
-        byte[] decValue = c.doFinal(decodedValue);
+        byte[] decValue = cipher.doFinal(decodedValue);
         return new String(decValue);
     }
+
     private static Key generateKey() throws Exception {
         return new SecretKeySpec(SECRET, "DES");
     }

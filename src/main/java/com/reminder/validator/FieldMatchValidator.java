@@ -1,11 +1,15 @@
 package com.reminder.validator;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Object> {
+
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private String firstFieldName;
     private String secondFieldName;
@@ -29,7 +33,7 @@ public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Obje
 
             toReturn = firstObj == null && secondObj == null || firstObj != null && firstObj.equals(secondObj);
         } catch (final Exception e) {
-            e.printStackTrace();
+            log.error("Internal server error, can't validate fields: ", e);
         }
 
         if (!toReturn) {

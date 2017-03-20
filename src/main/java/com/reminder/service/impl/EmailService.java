@@ -1,11 +1,16 @@
 package com.reminder.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class EmailService {
+
+    private static final Logger log = LoggerFactory.getLogger(EmailService.class);
 
     private static final String host = "smtp.gmail.com";
     private static final String port = "465";
@@ -43,7 +48,7 @@ public class EmailService {
 
             Transport.send(message);
         } catch (MessagingException e) {
-            e.printStackTrace();
+            log.error("Internal server error: ", e);
         }
 
     }
