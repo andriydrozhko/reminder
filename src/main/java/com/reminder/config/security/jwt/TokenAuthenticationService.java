@@ -38,7 +38,7 @@ public class TokenAuthenticationService {
                     .getBody()
                     .getSubject();
             if (username != null) {
-                return new AuthenticatedUser(username);
+                return new AuthenticatedUser(token, username);
             }
         }
         return null;

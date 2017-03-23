@@ -1,16 +1,23 @@
 package com.reminder.entity;
 
 
+import com.google.common.collect.Lists;
 import com.reminder.enums.UserRole;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 public class User {
 
     @Id
+    @Indexed(unique = true)
     private String id;
+
+    @Indexed(unique = true)
     private String email;
     private String userName;
     private String password;
@@ -18,6 +25,9 @@ public class User {
     private Date updatedDate;
     private Boolean active = true;
     private Set<UserRole> roles;
+
+    @DBRef
+    private List<Event> events = Lists.newArrayList();
 
 
     public String getId() {
@@ -83,4 +93,13 @@ public class User {
     public void setRoles(Set<UserRole> roles) {
         this.roles = roles;
     }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
 }

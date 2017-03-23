@@ -1,6 +1,7 @@
 package com.reminder.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.Date;
@@ -9,15 +10,17 @@ import java.util.Date;
 public class Event {
 
     @Id
+    @Indexed(unique = true)
     private String id;
+
     private String title;
     private Date eventDate;
     private Date createdDate;
     private Date updatedDate;
     private Boolean processed = Boolean.FALSE;
     private Date processedDate;
-//    @DBRef
-//    private User createdBy;
+    @DBRef
+    private User user;
 
     public String getId() {
         return id;
@@ -75,11 +78,11 @@ public class Event {
         this.processedDate = processedDate;
     }
 
-//    public User getCreatedBy() {
-//        return createdBy;
-//    }
-//
-//    public void setCreatedBy(User createdBy) {
-//        this.createdBy = createdBy;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

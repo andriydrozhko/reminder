@@ -8,6 +8,7 @@ import com.reminder.service.UserService;
 import com.reminder.util.CipherUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findOneByEmail(String email) {
-        return userRepository.findOneByEmail(email);
+        return StringUtils.isEmpty(email) ? null : userRepository.findOneByEmail(email);
     }
 
     @Override

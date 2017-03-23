@@ -5,16 +5,15 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
-public class AuthenticatedUser implements Authentication{
+public class AuthenticatedUser implements Authentication {
 
-    private String username;
+    private final String username;
+    private final String token;
     private boolean authenticated = true;
 
-    public AuthenticatedUser() {
-    }
-
-    public AuthenticatedUser(String username) {
+    public AuthenticatedUser(String token, String username) {
         this.username = username;
+        this.token = token;
     }
 
     @Override
@@ -29,7 +28,7 @@ public class AuthenticatedUser implements Authentication{
 
     @Override
     public Object getDetails() {
-        return null;
+        return token;
     }
 
     @Override
