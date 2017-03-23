@@ -18,6 +18,6 @@ public class UserDto {
 
     @NotBlank
     @ApiModelProperty(value = "Name/Login")
-    public String userName;
+    public String username;
 
 }

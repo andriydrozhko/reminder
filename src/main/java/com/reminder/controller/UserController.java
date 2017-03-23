@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
 
+import static com.reminder.Constants.BASE_API_V1_RESOURCE;
+
 
 //TODO should contains 2 data transfer objects (signUpUserDto, baseUserDto) - security purpose
 //TODO or create separate AuthController
 @Api(description = "User API")
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping(BASE_API_V1_RESOURCE + "/users")
 public class UserController extends BaseController {
 
     private final UserService userService;

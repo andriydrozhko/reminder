@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,10 +29,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userService.findOneByEmail(email.toLowerCase().trim());
-        if(!user.getActive()) {
-            throw new BadCredentialsException("Your account has been disabled");
-        }
+        return Optional.ofNullable(userService.findOneByEmail(email.trim()))
+                .filter(User::getActive)
+                .map(this::prepareUserDetails)
+                .orElseThrow(() -> new BadCredentialsException("Your account has been disabled"));
+    }
+
+    private UserDetails prepareUserDetails(User user) {
         Set<UserRole> roles = user.getRoles();
         Collection<GrantedAuthority> authorities = roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toList());

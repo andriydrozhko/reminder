@@ -20,6 +20,7 @@ import java.util.Date;
 import static com.jayway.restassured.http.ContentType.JSON;
 import static com.jayway.restassured.module.mockmvc.RestAssuredMockMvc.basePath;
 import static com.jayway.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static com.reminder.Constants.BASE_API_V1_RESOURCE;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -27,8 +28,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class EventControllerTest extends BaseWebTest {
-
-    private final String BASE_API_PATH = "/api/v1";
 
     @InjectMocks
     private EventController controller;
@@ -43,7 +42,7 @@ public class EventControllerTest extends BaseWebTest {
                 MockMvcBuilders.standaloneSetup(controller)
                         .setControllerAdvice(new ExceptionHandlerController())
         );
-        basePath = BASE_API_PATH;
+        basePath = BASE_API_V1_RESOURCE;
 
         doReturn(mockEvent(CORRECT_ID)).when(eventService).findOne(CORRECT_ID);
         doReturn(null).when(eventService).findOne(INCORRECT_ID);
@@ -138,7 +137,7 @@ public class EventControllerTest extends BaseWebTest {
                     .post("/events")
                 .then()
                     .statusCode(HttpStatus.CREATED.value())
-                    .header("Location", Matchers.endsWith(BASE_API_PATH + "/events/" + CREATED_ID))
+                    .header("Location", Matchers.endsWith(BASE_API_V1_RESOURCE + "/events/" + CREATED_ID))
                 .log()
                 .body();
 
@@ -155,7 +154,7 @@ public class EventControllerTest extends BaseWebTest {
                     .put("/events")
                 .then()
                     .statusCode(HttpStatus.CREATED.value())
-                    .header("Location", Matchers.endsWith(BASE_API_PATH + "/events/" + CORRECT_ID))
+                    .header("Location", Matchers.endsWith(BASE_API_V1_RESOURCE + "/events/" + CORRECT_ID))
                 .log()
                 .body();
 

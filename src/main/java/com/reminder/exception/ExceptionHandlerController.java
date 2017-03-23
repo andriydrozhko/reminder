@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -34,7 +35,12 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(value = { AccessDeniedException.class })
     public ResponseEntity<?> handleAccessDenied(Exception ex) {
-        return prepareResponse("Access denied message here", ex, new HttpHeaders(), HttpStatus.UNAUTHORIZED);
+        return prepareResponse("Access denied: ", ex, new HttpHeaders(), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(value = { AuthenticationException.class })
+    public ResponseEntity<?> handleAuthException(Exception ex) {
+        return prepareResponse("Can't authenticate:  ", ex, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = { MethodArgumentNotValidException.class })

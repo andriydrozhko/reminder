@@ -5,10 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-//import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-//TODO implement spring security
-//TODO add swagger configuration os smthg like that
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan("com.reminder")

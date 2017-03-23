@@ -15,10 +15,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import java.util.List;
 import java.util.Optional;
 
-//TODO move base resource 'api/v1' to Constants
+import static com.reminder.Constants.BASE_API_V1_RESOURCE;
+
 @RestController
 @PreAuthorize("hasAuthority('API_USER')")
-@RequestMapping("api/v1/events")
+@RequestMapping(BASE_API_V1_RESOURCE + "/events")
 public class EventController extends BaseController {
 
     @Autowired
