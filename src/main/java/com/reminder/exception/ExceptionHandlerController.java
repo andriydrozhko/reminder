@@ -8,16 +8,18 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Component
 @ControllerAdvice
 public class ExceptionHandlerController {
 
@@ -28,6 +30,11 @@ public class ExceptionHandlerController {
         return prepareResponse(ex.getMessage(), ex, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(value = { SQLException.class })
+    public ResponseEntity<?> handleSQLException(Exception ex) {
+        return prepareResponse("SQLException Occurred: ", ex, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(value = { IllegalArgumentException.class, IllegalStateException.class })
     public ResponseEntity<?> handleConflicts(RuntimeException ex) {
         return prepareResponse(ex.getMessage(), ex, new HttpHeaders(), HttpStatus.CONFLICT);
@@ -36,11 +43,6 @@ public class ExceptionHandlerController {
     @ExceptionHandler(value = { AccessDeniedException.class })
     public ResponseEntity<?> handleAccessDenied(Exception ex) {
         return prepareResponse("Access denied: ", ex, new HttpHeaders(), HttpStatus.UNAUTHORIZED);
-    }
-
-    @ExceptionHandler(value = { AuthenticationException.class })
-    public ResponseEntity<?> handleAuthException(Exception ex) {
-        return prepareResponse("Can't authenticate:  ", ex, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = { MethodArgumentNotValidException.class })
