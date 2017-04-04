@@ -48,5 +48,4 @@ public class UserValidatorTest {
         UserValidator.validate(new User(), null, FAILED_VALIDATION_MESSAGE);
     }
 
-
 }
