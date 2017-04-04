@@ -1,5 +1,6 @@
-package com.reminder.controller;
+package com.reminder.controller.common;
 
+import com.reminder.controller.BaseController;
 import com.reminder.dto.UserDto;
 import com.reminder.entity.User;
 import com.reminder.service.UserService;
@@ -32,6 +33,7 @@ public class UserController extends BaseController {
         this.userService = userService;
     }
 
+    //TODO do we actually have to show all users? Let's take just one by generated auth key
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<UserDto>> findAll() {
         return ResponseEntity.ok(mapper.mapAsList(userService.findAll(), UserDto.class));
@@ -50,7 +52,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
     public ResponseEntity<UserDto> create(@RequestBody @Valid UserDto body) {
-        User user = userService.saveOrUpdate(mapper.map(body, User.class));
+        User user = userService.update(mapper.map(body, User.class));
         return ResponseEntity.created(getCreateLocation(user.getId())).build();
     }
 }

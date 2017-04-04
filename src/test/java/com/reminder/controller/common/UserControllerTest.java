@@ -1,6 +1,7 @@
-package com.reminder.controller;
+package com.reminder.controller.common;
 
 import com.jayway.restassured.module.mockmvc.RestAssuredMockMvc;
+import com.reminder.controller.BaseWebTest;
 import com.reminder.exception.ExceptionHandlerController;
 import org.junit.Before;
 import org.mockito.InjectMocks;

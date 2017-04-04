@@ -1,6 +1,8 @@
-package com.reminder.controller;
+package com.reminder.controller.common;
 
 import com.jayway.restassured.module.mockmvc.RestAssuredMockMvc;
+import com.reminder.controller.BaseWebTest;
+import com.reminder.controller.common.EventController;
 import com.reminder.dto.EventDto;
 import com.reminder.entity.Event;
 import com.reminder.exception.ExceptionHandlerController;

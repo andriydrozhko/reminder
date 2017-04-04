@@ -37,7 +37,7 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(value = { IllegalArgumentException.class, IllegalStateException.class })
     public ResponseEntity<?> handleConflicts(RuntimeException ex) {
-        return prepareResponse(ex.getMessage(), ex, new HttpHeaders(), HttpStatus.CONFLICT);
+        return prepareResponse(ex.getMessage(), ex, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = { AccessDeniedException.class })

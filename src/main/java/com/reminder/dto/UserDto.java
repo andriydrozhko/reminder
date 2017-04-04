@@ -5,9 +5,12 @@ import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
+
 @ApiModel(value = "User data model")
 public class UserDto {
 
+    @NotNull
     @ApiModelProperty(value = "ID")
     public String id;
 

@@ -24,16 +24,29 @@ import static springfox.documentation.spi.DocumentationType.SWAGGER_2;
 @ComponentScan(basePackages = {"com.reminder.controller"})
 public class SwaggerConfiguration {
 
-    private static final String GROUP_NAME = "Reminder";
+    private static final String REMINDER_GROUP_NAME = "Reminder";
+    private static final String AUTH_GROUP_NAME = "Auth";
 
     @Bean
     public Docket api() {
         return new Docket(SWAGGER_2)
-                .groupName(GROUP_NAME)
+                .groupName(REMINDER_GROUP_NAME)
                 .globalOperationParameters(defineGlobalParameters())
                 .genericModelSubstitutes(ResponseEntity.class)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.reminder.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.reminder.controller.common"))
+                .paths(any())
+                .build();
+    }
+
+
+    @Bean
+    public Docket publicApi() {
+        return new Docket(SWAGGER_2)
+                .groupName(AUTH_GROUP_NAME)
+                .genericModelSubstitutes(ResponseEntity.class)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.reminder.controller.auth"))
                 .paths(any())
                 .build();
     }

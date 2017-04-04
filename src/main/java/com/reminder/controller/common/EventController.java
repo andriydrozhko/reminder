@@ -1,5 +1,6 @@
-package com.reminder.controller;
+package com.reminder.controller.common;
 
+import com.reminder.controller.BaseController;
 import com.reminder.dto.EventDto;
 import com.reminder.entity.Event;
 import com.reminder.service.EventService;
