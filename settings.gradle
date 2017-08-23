@@ -1,2 +1,6 @@
 rootProject.name = 'reminder'
 
+include 'api'
+include 'api:api-client'
+include 'api:api-server'
+include 'web'
